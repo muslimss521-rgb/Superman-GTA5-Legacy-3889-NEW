@@ -1,11 +1,29 @@
-@echo off
-setlocal
-if not exist build mkdir build
+name: Build Superman ASI
 
-cl /LD /EHsc /std:c++17 ^
-  /Iinclude ^
-  src\main.cpp src\Superman.cpp src\Flight.cpp src\Abilities.cpp ^
-  /link /OUT:build\Superman.asi
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
-if errorlevel 1 exit /b 1
-echo Built build\Superman.asi
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build Superman
+        shell: cmd
+        run: |
+          cl /LD /EHsc /std:c++17 /Iinclude src\main.cpp src\Superman.cpp src\Flight.cpp src\Abilities.cpp /link /OUT:Superman.asi
+
+      - name: Upload Superman.asi
+        uses: actions/upload-artifact@v4
+        with:
+          name: Superman-GTA5-Realistic-3889
+          path: Superman.asi
