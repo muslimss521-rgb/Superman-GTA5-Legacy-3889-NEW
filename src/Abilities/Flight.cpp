@@ -44,8 +44,15 @@ namespace Flight
 
         if (ENTITY::DOES_ENTITY_EXIST(playerPed))
         {
-            ENTITY::SET_ENTITY_HAS_GRAVITY(playerPed, false);
-            PED::SET_PED_CAN_RAGDOLL(playerPed, false);
+            ENTITY::SET_ENTITY_HAS_GRAVITY(
+                playerPed,
+                false
+            );
+
+            PED::SET_PED_CAN_RAGDOLL(
+                playerPed,
+                false
+            );
         }
     }
 
@@ -59,8 +66,15 @@ namespace Flight
 
         if (ENTITY::DOES_ENTITY_EXIST(playerPed))
         {
-            ENTITY::SET_ENTITY_HAS_GRAVITY(playerPed, true);
-            PED::SET_PED_CAN_RAGDOLL(playerPed, true);
+            ENTITY::SET_ENTITY_HAS_GRAVITY(
+                playerPed,
+                true
+            );
+
+            PED::SET_PED_CAN_RAGDOLL(
+                playerPed,
+                true
+            );
         }
     }
 
@@ -78,10 +92,9 @@ namespace Flight
             return;
 
         Vector3 forward =
-            CAM::GET_GAMEPLAY_CAM_FORWARD_VECTOR();
-
-        Vector3 velocity =
-            ENTITY::GET_ENTITY_VELOCITY(playerPed);
+            ENTITY::GET_ENTITY_FORWARD_VECTOR(
+                playerPed
+            );
 
         bool movingForward =
             (GetAsyncKeyState('W') & 0x8000) != 0;
@@ -127,77 +140,42 @@ namespace Flight
 
         if (movingUp)
         {
-            g_verticalSpeed += VERTICAL_ACCELERATION;
+            g_verticalSpeed +=
+                VERTICAL_ACCELERATION;
         }
         else if (movingDown)
         {
-            g_verticalSpeed -= VERTICAL_ACCELERATION;
+            g_verticalSpeed -=
+                VERTICAL_ACCELERATION;
         }
         else
         {
             g_verticalSpeed *= 0.85f;
         }
 
-        g_verticalSpeed =
-            Clamp(g_verticalSpeed, -12.0f, 12.0f);
+        g_verticalSpeed = Clamp(
+            g_verticalSpeed,
+            -12.0f,
+            12.0f
+        );
 
-        Vector3 newVelocity;
+        Vector3 velocity;
 
-        newVelocity.x =
+        velocity.x =
             forward.x * g_speed;
 
-        newVelocity.y =
+        velocity.y =
             forward.y * g_speed;
 
-        newVelocity.z =
+        velocity.z =
             forward.z * g_speed +
             g_verticalSpeed;
 
         ENTITY::SET_ENTITY_VELOCITY(
             playerPed,
-            newVelocity.x,
-            newVelocity.y,
-            newVelocity.z
-        );
-
-        ENTITY::SET_ENTITY_HAS_GRAVITY(
-            playerPed,
-            false
-        );
-
-        PED::SET_PED_CAN_RAGDOLL(
-            playerPed,
-            false
-        );
-    }
-}            pos.z += forward.z * g_speed;
-        }
-
-        if (GetAsyncKeyState('S') & 0x8000)
-        {
-            pos.x -= forward.x * g_speed;
-            pos.y -= forward.y * g_speed;
-            pos.z -= forward.z * g_speed;
-        }
-
-        if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-        {
-            pos.z += g_speed;
-        }
-
-        if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
-        {
-            pos.z -= g_speed;
-        }
-
-        ENTITY::SET_ENTITY_COORDS_NO_OFFSET(
-            playerPed,
-            pos.x,
-            pos.y,
-            pos.z,
-            false,
-            false,
-            false
+            velocity.x,
+            velocity.y,
+            velocity.z
         );
 
         ENTITY::SET_ENTITY_HAS_GRAVITY(
