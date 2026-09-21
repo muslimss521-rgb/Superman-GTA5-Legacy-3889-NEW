@@ -10,8 +10,7 @@ namespace Flight
         Takeoff,
         Flying,
         Boost,
-        Landing
-    };
+        
 
     void Initialize();
 
