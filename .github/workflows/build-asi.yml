@@ -19,6 +19,15 @@ jobs:
         with:
           arch: x64
 
+      - name: Check ScriptHookV.lib
+        shell: cmd
+        run: |
+          if not exist ScriptHookV.lib (
+            echo ERROR: ScriptHookV.lib not found
+            exit /b 1
+          )
+          echo ScriptHookV.lib found
+
       - name: Build
         shell: cmd
         run: |
@@ -27,7 +36,7 @@ jobs:
             src\main.cpp ^
             src\Superman\Superman.cpp ^
             src\Abilities\Flight.cpp ^
-            /link /OUT:Superman.dll
+            /link ScriptHookV.lib User32.lib /OUT:Superman.dll
 
       - name: Rename ASI
         shell: cmd
