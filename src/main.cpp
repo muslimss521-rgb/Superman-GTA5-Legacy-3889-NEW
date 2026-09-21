@@ -1,4 +1,4 @@
-#include "include/ScriptHookV/main.h"
+#include "../include/ScriptHookV/main.h"
 #include "Superman/Superman.h"
 
 void ScriptMain()
