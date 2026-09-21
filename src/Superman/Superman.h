@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../include/ScriptHookV/main.h"
-#include "../include/ScriptHookV/natives.h"
-#include "../include/ScriptHookV/types.h"
+#include "../../include/ScriptHookV/main.h"
+#include "../../include/ScriptHookV/natives.h"
+#include "../../include/ScriptHookV/types.h"
 
 namespace Superman
 {
