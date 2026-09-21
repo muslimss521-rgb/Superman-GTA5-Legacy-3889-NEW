@@ -67,39 +67,31 @@ namespace Native
         return *reinterpret_cast<Vec3*>(result);
     }
 
-
-    // PLAYER_PED_ID
+    // PLAYER::PLAYER_PED_ID
     inline int PlayerPed()
     {
         Begin(0xD80958FC74E988A6ULL);
         return Int();
     }
 
-
-    // GET_ENTITY_COORDS
+    // ENTITY::GET_ENTITY_COORDS
     inline Vec3 EntityCoords(int entity)
     {
         Begin(0x3FEF770D40960D5AULL);
-
         PushInt(entity);
         PushInt(1);
-
         return GetVec3();
     }
 
-
-    // GET_ENTITY_VELOCITY
+    // ENTITY::GET_ENTITY_VELOCITY
     inline Vec3 EntityVelocity(int entity)
     {
         Begin(0x4805D2DD1D4B6F8DULL);
-
         PushInt(entity);
-
         return GetVec3();
     }
 
-
-    // SET_ENTITY_VELOCITY
+    // ENTITY::SET_ENTITY_VELOCITY
     inline void SetEntityVelocity(
         int entity,
         float x,
@@ -116,30 +108,23 @@ namespace Native
         Call();
     }
 
-
-    // GET_ENTITY_FORWARD_VECTOR
+    // ENTITY::GET_ENTITY_FORWARD_VECTOR
     inline Vec3 ForwardVector(int entity)
     {
         Begin(0x0A794A5B9E0B8A0EULL);
-
         PushInt(entity);
-
         return GetVec3();
     }
 
-
-    // GET_ENTITY_HEADING
+    // ENTITY::GET_ENTITY_HEADING
     inline float Heading(int entity)
     {
         Begin(0xE83D4F9BA2A3890CULL);
-
         PushInt(entity);
-
         return Float();
     }
 
-
-    // SET_ENTITY_HEADING
+    // ENTITY::SET_ENTITY_HEADING
     inline void SetHeading(int entity, float heading)
     {
         Begin(0x8E2530AA8ADA980EULL);
@@ -150,8 +135,7 @@ namespace Native
         Call();
     }
 
-
-    // SET_ENTITY_INVINCIBLE
+    // ENTITY::SET_ENTITY_INVINCIBLE
     inline void SetInvincible(int entity, bool enabled)
     {
         Begin(0x3882114BDE571AD4ULL);
@@ -162,11 +146,8 @@ namespace Native
         Call();
     }
 
-
-    // IS_CONTROL_PRESSED
-    inline bool IsControlPressed(
-        int group,
-        int control)
+    // PAD::IS_CONTROL_PRESSED
+    inline bool IsControlPressed(int group, int control)
     {
         Begin(0xF3A21BCD95725A4AULL);
 
@@ -176,13 +157,10 @@ namespace Native
         return Bool();
     }
 
-
-    // IS_CONTROL_JUST_PRESSED
-    inline bool IsControlJustPressed(
-        int group,
-        int control)
+    // PAD::IS_CONTROL_JUST_PRESSED
+    inline bool IsControlJustPressed(int group, int control)
     {
-        Begin(0x580417101DD7DDAFULL);
+        Begin(0x580417101DDB492FULL);
 
         PushInt(group);
         PushInt(control);
@@ -190,11 +168,8 @@ namespace Native
         return Bool();
     }
 
-
-    // DISABLE_CONTROL_ACTION
-    inline void DisableControlAction(
-        int group,
-        int control)
+    // PAD::DISABLE_CONTROL_ACTION
+    inline void DisableControlAction(int group, int control)
     {
         Begin(0xFE99B66D079CF6BCULL);
 
@@ -205,8 +180,7 @@ namespace Native
         Call();
     }
 
-
-    // APPLY_FORCE_TO_ENTITY
+    // ENTITY::APPLY_FORCE_TO_ENTITY
     inline void ApplyForce(
         int entity,
         float x,
@@ -236,8 +210,7 @@ namespace Native
         Call();
     }
 
-
-    // SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER
+    // PLAYER::SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER
     inline void SetRunSprintMultiplier(
         int player,
         float value)
@@ -250,8 +223,7 @@ namespace Native
         Call();
     }
 
-
-    // SET_SEETHROUGH
+    // GRAPHICS::SET_SEETHROUGH
     inline void SetSeethrough(bool enabled)
     {
         Begin(0x7E08924259E08CE0ULL);
@@ -261,8 +233,7 @@ namespace Native
         Call();
     }
 
-
-    // IS_PED_IN_ANY_VEHICLE
+    // PED::IS_PED_IN_ANY_VEHICLE
     inline bool IsPedInAnyVehicle(int ped)
     {
         Begin(0x997ABD671D25CA0BULL);
@@ -273,8 +244,7 @@ namespace Native
         return Bool();
     }
 
-
-    // SET_ENTITY_COLLISION
+    // ENTITY::SET_ENTITY_COLLISION
     inline void SetEntityCollision(
         int entity,
         bool enabled)
