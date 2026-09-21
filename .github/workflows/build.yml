@@ -20,8 +20,7 @@ jobs:
       - name: Build Superman
         shell: cmd
         run: |
-          cl /LD /EHsc /std:c++17 /Iinclude src\main.cpp src\Superman.cpp src\Flight.cpp src\Abilities.cpp /link /OUT:Superman.asi
-
+          cl /LD /EHsc /std:c++17 /Iinclude src\main.cpp src\Superman.cpp src\Flight.cpp src\Abilities.cpp /link /LIBPATH:lib ScriptHookV.lib /OUT:Superman.asi
       - name: Upload Superman.asi
         uses: actions/upload-artifact@v4
         with:
