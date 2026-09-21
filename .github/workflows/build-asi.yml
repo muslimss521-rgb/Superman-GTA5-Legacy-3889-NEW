@@ -1,1 +1,37 @@
+name: Build Superman ASI
 
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          cl /LD /EHsc /std:c++17 ^
+            /I include ^
+            src\main.cpp ^
+            src\Superman\Superman.cpp ^
+            src\Abilities\Flight.cpp ^
+            /link /OUT:Superman.dll
+
+      - name: Rename ASI
+        shell: cmd
+        run: |
+          ren Superman.dll Superman.asi
+
+      - name: Upload Superman.asi
+        uses: actions/upload-artifact@v4
+        with:
+          name: Superman-ASI
+          path: Superman.asi
