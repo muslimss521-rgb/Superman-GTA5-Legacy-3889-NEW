@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../include/ScriptHookV/script.h"
+#include "../../include/ScriptHookV/main.h"
 
 namespace Flight
 {
